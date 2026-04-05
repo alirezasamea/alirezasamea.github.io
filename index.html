@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alireza Samea</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1e2e;
+      --navy-mid: #162436;
+      --navy-light: #1e3248;
+      --accent: #c8a96e;
+      --accent-light: #e2c98e;
+      --text: #e8e4dc;
+      --text-muted: #9aa3ad;
+      --border: rgba(200,169,110,0.2);
+      --card-bg: rgba(30,50,72,0.6);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--navy);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(15,30,46,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(30,50,72,0.8) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-positions {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-positions p { margin-bottom: 0.3rem; }
+
+    .hero-bio {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--navy);
+    }
+    .btn-primary:hover { background: var(--accent-light); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-photo-wrap {
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: grayscale(20%);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+
+    .cv-items { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .cv-item {
+      padding: 1.2rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .cv-item-year {
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+
+    .cv-item-title {
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .cv-item-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-tool {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-grow: 1;
+    }
+
+    .project-level {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .pub-item {
+      padding: 1.5rem 1.8rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .pub-item:hover { border-color: var(--accent); }
+
+    .pub-title {
+      font-size: 0.97rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .pub-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pub-citations {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-text {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* DIVIDER */
+    .full-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 4rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .hero { padding: 7rem 2rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-photo-wrap { order: -1; max-width: 240px; }
+      section { padding: 4rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .full-divider { margin: 0 2rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1.2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">A. Samea</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">Academic &amp; Data Analytics</div>
+        <h1>Alireza <span>Samea</span></h1>
+        <div class="hero-positions">
+          <p>Assistant Professor, University Canada West</p>
+          <p>Lecturer, Northeastern University Vancouver</p>
+        </div>
+        <p class="hero-bio">
+          I build data analytics projects as practical learning resources for my students,
+          covering Power BI, R, Python, and Tableau. Each project is reproducible,
+          well-documented, and designed to be followed from start to finish.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#publications" class="btn btn-outline">Publications</a>
+          <a href="https://scholar.google.com/citations?user=WtFkLfoAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="profile.jpg" alt="Alireza Samea" class="hero-photo"/>
+      </div>
+    </div>
+  </div>
+
+  <hr class="full-divider"/>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am an Assistant Professor at University Canada West and a Part-Time Lecturer
+          at Northeastern University Vancouver, where I teach business analytics, SQL,
+          database design, statistics, and digital transformation to 400+ students per year.
+        </p>
+        <p>
+          I hold a Ph.D. in Civil Engineering (Geotechnical and GeoEnvironmental Engineering)
+          from Queen's University, where I spent six years conducting experimental research
+          and publishing in peer-reviewed journals. My work has been cited over 50 times.
+        </p>
+        <p>
+          Beyond research, I develop open analytics projects that students can use as
+          templates for their own portfolios. These projects span the full data science
+          workflow from raw data to business recommendations, using Power BI, R, Python,
+          and Tableau.
+        </p>
+      </div>
+      <div class="cv-items">
+        <div class="cv-item">
+          <div class="cv-item-year">2022 – Present</div>
+          <div class="cv-item-title">Assistant Professor</div>
+          <div class="cv-item-sub">University Canada West, Vancouver</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-year">2024 – Present</div>
+          <div class="cv-item-title">Part-Time Lecturer, Khoury College of Computer Sciences</div>
+          <div class="cv-item-sub">Northeastern University, Vancouver</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-year">2017 – 2023</div>
+          <div class="cv-item-title">Ph.D., Civil Engineering</div>
+          <div class="cv-item-sub">Queen's University, Kingston, Canada</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-year">2013 – 2016</div>
+          <div class="cv-item-title">M.Sc., Civil Engineering</div>
+          <div class="cv-item-sub">University of Tehran, Iran</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-year">Certifications</div>
+          <div class="cv-item-title">Power BI, AI for Data Analytics, Google Data Analytics</div>
+          <div class="cv-item-sub">UBC Sauder, Coursera, DeepLearning.AI, Wharton</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="full-divider"/>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Data Analytics Projects</h2>
+    <div class="projects-grid">
+
+      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/HR%20Workforce%20Analytics" target="_blank" class="project-card">
+        <div class="project-tool">Power BI</div>
+        <div class="project-title">HR Workforce Analytics</div>
+        <div class="project-desc">Attrition analysis across 1,470 employee records. KPI cards, conditional formatting, tooltip pages.</div>
+        <div class="project-level">Beginner</div>
+      </a>
+
+      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/USA%20Real%20Estate%20Dataset" target="_blank" class="project-card">
+        <div class="project-tool">Power BI</div>
+        <div class="project-title">USA Real Estate Dashboard</div>
+        <div class="project-desc">Market analysis across US property listings. Dynamic titles, market quadrant analysis, Market Competitiveness Score.</div>
+        <div class="project-level">Intermediate</div>
+      </a>
+
+      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/Customer%20Churn%20Revenue%20Risk" target="_blank" class="project-card">
+        <div class="project-tool">Power BI</div>
+        <div class="project-title">Customer Churn Revenue Risk</div>
+        <div class="project-desc">Churn prediction dashboard with risk segmentation and retention recommendations.</div>
+        <div class="project-level">Advanced</div>
+      </a>
+
+      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Python/Superstore-Sales-Analysis" target="_blank" class="project-card">
+        <div class="project-tool">Python</div>
+        <div class="project-title">Superstore Sales Analysis</div>
+        <div class="project-desc">EDA on 9,994 sales records covering trends, profitability, regional performance, and customer segments.</div>
+        <div class="project-level">Intermediate</div>
+      </a>
+
+      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/R/Hotel%20booking%20demand" target="_blank" class="project-card">
+        <div class="project-tool">R</div>
+        <div class="project-title">Hotel Booking Demand Analysis</div>
+        <div class="project-desc">EDA, hypothesis testing, and logistic regression on 119,390 hotel booking records to identify cancellation drivers.</div>
+        <div class="project-level">Intermediate</div>
+      </a>
+
+      <div class="project-card" style="border-style: dashed; cursor: default;">
+        <div class="project-tool">Tableau</div>
+        <div class="project-title">Coming Soon</div>
+        <div class="project-desc">New projects added every term across different tools and domains.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="full-divider"/>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label">Research</div>
+    <h2 class="section-title">Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <div class="pub-title">Cross-city transfer learning for PM2.5 prediction: The role of temporal persistence versus climate-pollution relationships</div>
+        <div class="pub-meta">
+          <span>A Samea, A Shirazi</span>
+          <span>15th International Conference on Air Quality, Prague, Czech Republic</span>
+          <span>2026 (Submitted)</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Effect of elevated temperatures on the degradation behaviour of elastomeric bituminous geomembranes</div>
+        <div class="pub-meta">
+          <span>A Samea, FB Abdelaal</span>
+          <span>Geotextiles and Geomembranes 51 (1), 219-232</span>
+          <span>2023</span>
+          <span class="pub-citations">23 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Durability of two bituminous geomembranes (BGMs) with different thicknesses in MSW synthetic leachate</div>
+        <div class="pub-meta">
+          <span>A Samea, FB Abdelaal</span>
+          <span>Waste Management 165, 179-188</span>
+          <span>2023</span>
+          <span class="pub-citations">8 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Chemical durability of bituminous geomembranes (BGMs) in heap leach pad applications</div>
+        <div class="pub-meta">
+          <span>FB Abdelaal, A Samea</span>
+          <span>Geosynthetics International 31 (5), 506-523</span>
+          <span>2024</span>
+          <span class="pub-citations">7 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">The long-term performance of a bituminous geomembrane (BGM) under single-sided exposure conditions</div>
+        <div class="pub-meta">
+          <span>FB Abdelaal, A Samea</span>
+          <span>Canadian Geotechnical Journal 61 (6), 1109-1126</span>
+          <span>2023</span>
+          <span class="pub-citations">3 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Short-term durability of elastomeric bituminous geomembranes at 70° C: A comparison of the effect of immersion methods</div>
+        <div class="pub-meta">
+          <span>F Hojjati, F Abdelaal, S Bhat, A Samea</span>
+          <span>E3S Web of Conferences 569, 11001</span>
+          <span>2024</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Chemical durability of bituminous geomembranes in heap leaching applications at 55° C</div>
+        <div class="pub-meta">
+          <span>A Samea, FB Abdelaal</span>
+          <span>Proceedings of Geosynthetics 2019 Conference, Houston, Texas, USA</span>
+          <span>2019</span>
+          <span class="pub-citations">6 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Assessment of the Effect of Different Factors on Asphalt Overlay Cohesion to the Roller-Compacted Concrete Pavement</div>
+        <div class="pub-meta">
+          <span>A Samea et al.</span>
+          <span>11th International Congress on Civil Engineering, Tehran, Iran</span>
+          <span>2018</span>
+          <span>
+            <a href="https://scholar.google.com/citations?user=WtFkLfoAAAAJ&hl=en" target="_blank" style="color: var(--accent); text-decoration: none;">View all on Google Scholar</a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="full-divider"/>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-text">
+          Feel free to reach out for research collaborations, teaching inquiries,
+          or questions about the analytics projects and learning resources.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:alireza.samea@queensu.ca" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            alireza.samea@queensu.ca
+          </a>
+          <a href="https://github.com/alirezasamea" target="_blank" class="contact-link">
+            <div class="contact-link-icon">⌥</div>
+            github.com/alirezasamea
+          </a>
+          <a href="https://www.linkedin.com/in/alirezasamea/" target="_blank" class="contact-link">
+            <div class="contact-link-icon">in</div>
+            linkedin.com/in/alirezasamea
+          </a>
+          <a href="https://scholar.google.com/citations?user=WtFkLfoAAAAJ&hl=en" target="_blank" class="contact-link">
+            <div class="contact-link-icon">GS</div>
+            Google Scholar Profile
+          </a>
+        </div>
+      </div>
+      <div>
+        <a href="https://github.com/alirezasamea/data-analytics-portfolio" target="_blank" class="project-card" style="display: flex;">
+          <div class="project-tool">GitHub Portfolio</div>
+          <div class="project-title">data-analytics-portfolio</div>
+          <div class="project-desc">Power BI, R, Python and Tableau projects designed as learning resources for students.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Alireza Samea &copy; 2026</p>
+  </footer>
+
+</body>
+</html>
