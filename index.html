@@ -65,10 +65,10 @@
 
     /* HERO */
     .hero {
-      min-height: 100vh;
+      min-height: auto;
       display: flex;
       align-items: center;
-      padding: 8rem 4rem 4rem;
+      padding: 5rem 4rem 3rem;
       position: relative;
       overflow: hidden;
     }
@@ -443,18 +443,13 @@
         <div class="hero-tag">Academic &amp; Data Analytics</div>
         <h1>Alireza <span>Samea</span></h1>
         <div class="hero-positions">
-          <p>Assistant Professor, University Canada West</p>
           <p>Lecturer, Northeastern University Vancouver</p>
         </div>
         <p class="hero-bio">
           Data analytics educator and researcher with a Ph.D. in Civil Engineering, 
           specializing in statistical modeling and business intelligence.
         </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#publications" class="btn btn-outline">Publications</a>
-          <a href="https://scholar.google.com/citations?user=WtFkLfoAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
-        </div>
+
       </div>
       <div class="hero-photo-wrap">
         <img src="profile.jpg" alt="Alireza Samea" class="hero-photo"/>
@@ -470,8 +465,7 @@
     <h2 class="section-title">About Me</h2>
     <div style="margin-bottom: 3rem;">
       <p style="color: var(--text-muted); font-size: 0.97rem; margin-bottom: 1.2rem;">
-        I am an Assistant Professor at University Canada West and a Part-Time Lecturer
-        at Northeastern University Vancouver, where I teach business analytics, SQL,
+        I am a Part-Time Lecturer at Northeastern University Vancouver, where I teach business analytics, SQL,
         database design, statistics, R, and digital transformation.
       </p>
       <p style="color: var(--text-muted); font-size: 0.97rem;">
@@ -516,12 +510,6 @@
             <div class="cv-item-sub">Northeastern University, Vancouver</div>
           </div>
           <div class="cv-item">
-            <div class="cv-item-year">Jan 2025 – Apr 2026</div>
-            <div class="cv-item-title">Assistant Professor</div>
-            <div class="cv-item-sub">University Canada West, Vancouver</div>
-            <div class="cv-item-sub">Department of Marketing, Strategy & Entrepreneurship</div>
-          </div>
-          <div class="cv-item">
             <div class="cv-item-year">Jul 2022 – Dec 2024</div>
             <div class="cv-item-title">Sessional Faculty</div>
             <div class="cv-item-sub">University Canada West, Vancouver</div>
@@ -543,67 +531,292 @@
   <section id="projects">
     <div class="section-label">Portfolio</div>
     <h2 class="section-title">Data Analytics Projects</h2>
-    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.97rem;">
-      The following projects are designed as applied case studies for my students, 
-      covering the full analytics workflow from data cleaning to business recommendations.
+    <p style="color: var(--text-muted); margin-bottom: 3rem; font-size: 0.97rem;">
+      Applied case studies covering the full analytics workflow from data cleaning to business recommendations.
+      Projects are organized by tool and designed to be reproducible by students.
     </p>
-    <div class="projects-grid">
 
-      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/HR%20Workforce%20Analytics" target="_blank" class="project-card">
-        <div class="project-tool">Power BI</div>
-        <div class="project-title">HR Workforce Analytics</div>
-        <div class="project-desc">Attrition analysis across 1,470 employee records. KPI cards, conditional formatting, tooltip pages.</div>
-      </a>
+    <style>
+      .tool-group { margin-bottom: 2.5rem; }
+      .tool-header-box {
+        background: rgba(200,169,110,0.08);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 4px;
+        padding: 0.9rem 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+      }
+      .tool-header-left { display: flex; align-items: center; gap: 1rem; }
+      .tool-header-link {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+      }
+      .tool-header-link:hover { color: var(--accent-light); }
+      .tool-header-count {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .proj-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1.3rem 1.6rem;
+        margin-bottom: 0.7rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.2rem;
+        align-items: start;
+        transition: border-color 0.2s;
+      }
+      .proj-box:hover { border-color: var(--accent); }
+      .proj-box-title {
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: var(--text);
+        margin-bottom: 0.25rem;
+      }
+      .proj-box-desc {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin-bottom: 0.85rem;
+      }
+      .proj-kpis { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+      .proj-kpi { display: flex; flex-direction: column; gap: 0.1rem; }
+      .proj-kpi-value {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .proj-kpi-label {
+        font-size: 0.66rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      .proj-box-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        align-items: flex-end;
+        flex-shrink: 0;
+        padding-top: 0.1rem;
+      }
+      .proj-link {
+        font-size: 0.77rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s;
+      }
+      .proj-link:hover { color: var(--accent); }
+      .proj-link-live {
+        font-size: 0.77rem;
+        color: var(--accent);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .proj-link-live:hover { color: var(--accent-light); }
+    </style>
 
-      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/USA%20Real%20Estate%20Dataset" target="_blank" class="project-card">
-        <div class="project-tool">Power BI</div>
-        <div class="project-title">USA Real Estate Dashboard</div>
-        <div class="project-desc">Market analysis across US property listings. Dynamic titles, market quadrant analysis, Market Competitiveness Score.</div>
-      </a>
-
-      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/Customer%20Churn%20Revenue%20Risk" target="_blank" class="project-card">
-        <div class="project-tool">Power BI</div>
-        <div class="project-title">Customer Churn Revenue Risk</div>
-        <div class="project-desc">Churn prediction dashboard with risk segmentation and retention recommendations.</div>
-      </a>
-
-      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Python/Superstore-Sales-Analysis" target="_blank" class="project-card">
-        <div class="project-tool">Python</div>
-        <div class="project-title">Superstore Sales Analysis</div>
-        <div class="project-desc">EDA on 9,994 sales records covering trends, profitability, regional performance, and customer segments.</div>
-      </a>
-
-      <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/R/Hotel%20booking%20demand" target="_blank" class="project-card">
-        <div class="project-tool">R</div>
-        <div class="project-title">Hotel Booking Demand Analysis</div>
-        <div class="project-desc">EDA, hypothesis testing, and logistic regression on 119,390 hotel booking records to identify cancellation drivers.</div>
-      </a>
-
-      <div class="project-card" onclick="window.open('https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Tableau/Canadian%20Housing%20Market','_blank')" style="cursor: pointer;">
-        <div class="project-tool">Tableau</div>
-        <div class="project-title">Canadian Housing Market Intelligence Dashboard</div>
-        <div class="project-desc">20 years of housing price data across 59 Canadian markets. Parameters, LOD expressions, dual-axis charts, and a reproducible Python data pipeline.</div>
-        <a href="https://public.tableau.com/app/profile/alireza.samea7416/viz/CanadianHousingMarketIntelligenceDashboardJan2005Feb2026/NationalOverview" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.82rem;" onclick="event.stopPropagation()">View live dashboard →</a>
-      </div>
-
-      <div class="project-card" onclick="window.open('https://public.tableau.com/views/CanadianLabourMarketDashboard/CoverPage?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link','_blank')" style="cursor: pointer;">
-        <div class="project-tool">Tableau</div>
-        <div class="project-title">Canadian Labour Market Dashboard</div>
-        <div class="project-desc">Interactive analysis of Canada's labour force trends, Jan 2000–Feb 2026. Provincial comparisons, industry employment, wages, and demographic breakdowns. Source: Statistics Canada LFS.</div>
-        <a href="https://public.tableau.com/views/CanadianLabourMarketDashboard/CoverPage?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" style="color: var(--accent); text-decoration: none; font-size: 0.82rem;" onclick="event.stopPropagation()">View live dashboard →</a>
-      </div>
-
-      <div class="project-card" style="cursor:default;">
-        <div class="project-tool">SQL / MySQL / Snowflake</div>
-        <div class="project-title">NYC Taxi SQL Analytics</div>
-        <div class="project-desc">Star schema database with 53.6 million real taxi trips. MySQL ETL pipeline, analytical SQL queries, window functions, CTEs, and performance benchmarking against Snowflake where queries that took 45 minutes in MySQL run in under half a second.</div>
-        <div style="display:flex; gap:0.8rem; margin-top:0.4rem;">
-          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/SQL/NYC-Taxi-SQL-Analytics" target="_blank" style="color:var(--accent); text-decoration:none; font-size:0.82rem;">Phase 1 - MySQL</a>
-          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/SQL/NYC-Taxi-Snowflake" target="_blank" style="color:var(--accent); text-decoration:none; font-size:0.82rem;">Phase 2 - Snowflake</a>
+    <!-- POWER BI -->
+    <div class="tool-group">
+      <div class="tool-header-box">
+        <div class="tool-header-left">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI" target="_blank" class="tool-header-link">Power BI</a>
         </div>
-        <div class="project-level">Advanced</div>
       </div>
 
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">HR Workforce Analytics</div>
+          <div class="proj-box-desc">Attrition analysis on 1,470 employee records. Star schema, 13 DAX measures, conditional formatting, tooltip pages.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">16.12%</span><span class="proj-kpi-label">Attrition Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">30.5%</span><span class="proj-kpi-label">Overtime Attrition Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">39.76%</span><span class="proj-kpi-label">Sales Rep Attrition Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">97</span><span class="proj-kpi-label">High Risk Employees Still Active</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/HR%20Workforce%20Analytics" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">USA Real Estate Dashboard</div>
+          <div class="proj-box-desc">Market analysis across 2.2M property listings. Dynamic titles, Market Competitiveness Score, quadrant analysis, tooltip pages.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">$488,863</span><span class="proj-kpi-label">Avg Listing Price</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$1,036,002</span><span class="proj-kpi-label">Hawaii Avg Price (most expensive)</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$325,000</span><span class="proj-kpi-label">Median Price</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">41%</span><span class="proj-kpi-label">Listings in $200K to $500K Band</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/USA%20Real%20Estate%20Dataset" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">Customer Churn Revenue Risk</div>
+          <div class="proj-box-desc">Churn analysis on IBM Telco dataset. Star schema with surrogate keys, revenue risk segmentation, what-if simulator.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">26.54%</span><span class="proj-kpi-label">Overall Churn Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">30.50%</span><span class="proj-kpi-label">Revenue at Risk</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">54.61%</span><span class="proj-kpi-label">Month-to-Month Fiber Optic Churn</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$153,547</span><span class="proj-kpi-label">High Risk Monthly Revenue</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/PowerBI/Customer%20Churn%20Revenue%20Risk" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLEAU -->
+    <div class="tool-group">
+      <div class="tool-header-box">
+        <div class="tool-header-left">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Tableau" target="_blank" class="tool-header-link">Tableau</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">Canadian Housing Market Intelligence Dashboard</div>
+          <div class="proj-box-desc">20 years of MLS HPI data across 59 Canadian markets. Parameters, LOD expressions, dual-axis charts, reproducible Python pipeline.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">318.6</span><span class="proj-kpi-label">Avg Composite HPI</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$572,924</span><span class="proj-kpi-label">Avg Benchmark Price</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">59</span><span class="proj-kpi-label">Markets Tracked</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">214.7%</span><span class="proj-kpi-label">Vancouver HPI Growth Since 2005</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://public.tableau.com/app/profile/alireza.samea7416/viz/CanadianHousingMarketIntelligenceDashboardJan2005Feb2026/NationalOverview" target="_blank" class="proj-link-live">Live dashboard →</a>
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Tableau/Canadian%20Housing%20Market" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">Canadian Labour Market Dashboard</div>
+          <div class="proj-box-desc">26 years of Stats Canada LFS data. 4 dashboards covering national trends, provincial comparisons, industry wages, and demographic breakdowns.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">6.7%</span><span class="proj-kpi-label">Unemployment Rate (Feb 2026)</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">21M</span><span class="proj-kpi-label">Total Employment</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">64.9%</span><span class="proj-kpi-label">Participation Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">13.7%</span><span class="proj-kpi-label">Highest Provincial Unemployment (NL)</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://public.tableau.com/views/CanadianLabourMarketDashboard/CoverPage" target="_blank" class="proj-link-live">Live dashboard →</a>
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Tableau/Canadian%20Labour%20Market" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SQL -->
+    <div class="tool-group">
+      <div class="tool-header-box">
+        <div class="tool-header-left">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/SQL" target="_blank" class="tool-header-link">SQL</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">NYC Taxi Analytics: Phase 1 (MySQL)</div>
+          <div class="proj-box-desc">Star schema database built from scratch. Python ETL pipeline loading 51.5M real taxi trips. Analytical queries covering revenue, zones, routes, and demand patterns.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">$174M</span><span class="proj-kpi-label">JFK Airport Revenue (top zone)</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$20.24</span><span class="proj-kpi-label">Avg Yellow Fare</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">67.83%</span><span class="proj-kpi-label">Credit Card Payment Share</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">63%</span><span class="proj-kpi-label">Solo Rider Trips</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/SQL/NYC-Taxi-SQL-Analytics" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">NYC Taxi Analytics: Phase 2 (Snowflake)</div>
+          <div class="proj-box-desc">Same star schema and queries rebuilt in Snowflake. Demonstrates columnar storage, micro-partition pruning, and internal staging with dramatic performance gains over MySQL.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">5,450x</span><span class="proj-kpi-label">Max Speedup vs MySQL</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">45 min</span><span class="proj-kpi-label">MySQL Slowest Query</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">495 ms</span><span class="proj-kpi-label">Same Query in Snowflake</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">&lt;3 sec</span><span class="proj-kpi-label">All 10 Queries Under</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/SQL/NYC-Taxi-Snowflake" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PYTHON -->
+    <div class="tool-group">
+      <div class="tool-header-box">
+        <div class="tool-header-left">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Python" target="_blank" class="tool-header-link">Python</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">Superstore Sales Analysis</div>
+          <div class="proj-box-desc">Full EDA workflow using pandas, Matplotlib, and Seaborn. Covers trends, profitability, regional performance, and customer segment analysis.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">$2.3M</span><span class="proj-kpi-label">Total Sales</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">$286,397</span><span class="proj-kpi-label">Total Profit</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">2.5%</span><span class="proj-kpi-label">Furniture Profit Margin</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">West</span><span class="proj-kpi-label">Highest Revenue Region</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/Python/Superstore-Sales-Analysis" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- R -->
+    <div class="tool-group">
+      <div class="tool-header-box">
+        <div class="tool-header-left">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/R" target="_blank" class="tool-header-link">R</a>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <div>
+          <div class="proj-box-title">Hotel Booking Demand Analysis</div>
+          <div class="proj-box-desc">Full R Markdown analysis with ggplot2. Covers EDA, hypothesis testing, and logistic regression to identify cancellation drivers across 119,390 hotel bookings.</div>
+          <div class="proj-kpis">
+            <div class="proj-kpi"><span class="proj-kpi-value">27.5%</span><span class="proj-kpi-label">Overall Cancellation Rate</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">40x</span><span class="proj-kpi-label">Non-Refundable Deposit Cancellation Risk</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">33%</span><span class="proj-kpi-label">Lower Cancellation Odds for Resort Hotels</span></div>
+            <div class="proj-kpi"><span class="proj-kpi-value">3x</span><span class="proj-kpi-label">Higher Cancellation Risk for Transient Customers</span></div>
+          </div>
+        </div>
+        <div class="proj-box-links">
+          <a href="https://github.com/alirezasamea/data-analytics-portfolio/tree/main/R/Hotel%20booking%20demand" target="_blank" class="proj-link">View project →</a>
+        </div>
+      </div>
     </div>
 
   </section>
